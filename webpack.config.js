@@ -1,29 +1,25 @@
 const path = require('path');
-const webpack = require('webpack');
+
 
 module.exports = (env) => {
     const environment = env || 'production';
-
     return {
         mode: environment,
         entry: './src/index.js',
         output: {
             path: path.resolve(__dirname, 'build'),
-            filename: 'app.bundle.js'
+            filename: 'app.' + environment + 'bundle.js'
         },
-        plugins: [
-            new webpack.ProvidePlugin({
-                "React": "react",
-            }),
-        ],
         module: {
-            rules: [{
+            rules: [
+                {
                     test: /\.js$/,
                     loader: "babel-loader"
                 },
                 {
                     test: /\.css$/,
-                    use: [{
+                    use: [
+                        {
                             loader: 'style-loader'
                         },
                         {
